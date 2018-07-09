@@ -15,7 +15,8 @@
     "dev": "node build/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config build/webpack.main.config.js",
-    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config build/webpack.renderer.config.js"
+    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config build/webpack.renderer.config.js",
+    "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.49",
@@ -52,7 +53,6 @@
     "node-sass": "4.9.2",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "ora": "^2.1.0",
-    "portfinder": "1.0.13",
     "postcss-import": "11.1.0",
     "postcss-load-config": "1.2.0",
     "postcss-loader": "2.1.5",
@@ -82,6 +82,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "electron-config": "^1.0.0",
+    "electron-is": "^2.4.1",
+    "electron-log": "^2.2.16",
     "emotion": "^9.2.5",
     "history": "4.7.2",
     "mobx": "^5.0.3",

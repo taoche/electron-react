@@ -6,16 +6,8 @@ const path = require('path')
 const webpack = require('webpack')
 const { dependencies } = require('../package.json')
 
-const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
-
-let mainConfig = {
+module.exports = {
   target: 'electron-main',
-
-  mode: 'development',
-
-  entry: {
-    main: path.join(__dirname, '../src/main/index.js')
-  },
 
   output: {
     filename: '[name].js',
@@ -40,10 +32,7 @@ let mainConfig = {
       }
     ]
   },
-  node: {
-    __dirname: process.env.NODE_ENV !== 'production',
-    __filename: process.env.NODE_ENV !== 'production'
-  },
+
   plugins: [
     new webpack.NoEmitOnErrorsPlugin()
   ],
@@ -51,42 +40,3 @@ let mainConfig = {
     extensions: ['.js', '.json', '.node']
   }
 }
-
-/**
- * Adjust mainConfig for development settings
- */
-if (process.env.NODE_ENV !== 'production') {
-  mainConfig.plugins.push(
-    new webpack.DefinePlugin({
-      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
-    })
-  )
-}
-
-/**
- * Adjust mainConfig for production settings
- */
-if (process.env.NODE_ENV === 'production') {
-  mainConfig.optimization = {
-    minimizer: [
-      new UglifyJsWebpackPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false,
-          },
-        },
-        sourceMap: false,
-        parallel: true,
-      }),
-    ]
-  }
-
-  mainConfig.plugins.push(
-    new BabiliWebpackPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    })
-  )
-}
-
-module.exports = mainConfig

@@ -18,10 +18,6 @@ module.exports = {
 
   // context: path.resolve(__dirname, '../'),
 
-  entry: {
-    renderer: ['@babel/polyfill', './src/renderer/index.tsx'],
-  },
-
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

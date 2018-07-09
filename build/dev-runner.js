@@ -9,7 +9,7 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
-const mainConfig = require('./webpack.main.base.conf')
+const mainConfig = require('./webpack.main.dev.conf')
 const rendererConfig = require('./webpack.renderer.dev.conf')
 
 let electronProcess = null
@@ -40,9 +40,8 @@ function logStats (proc, data) {
 
 function startRenderer () {
   return new Promise((resolve, reject) => {
-    rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
-
     const compiler = webpack(rendererConfig)
+
     hotMiddleware = webpackHotMiddleware(compiler, {
       log: false,
       heartbeat: 2500
@@ -62,7 +61,6 @@ function startRenderer () {
     const server = new WebpackDevServer(
       compiler,
       Object.assign({}, rendererConfig.devServer, {
-        contentBase: path.join(__dirname, '../'),
         before (app, ctx) {
           app.use(hotMiddleware)
           ctx.middleware.waitUntilValid(() => {
@@ -78,7 +76,6 @@ function startRenderer () {
 
 function startMain () {
   return new Promise((resolve, reject) => {
-    mainConfig.entry.main = [path.join(__dirname, '../src/main/index.dev.js')].concat(mainConfig.entry.main)
 
     const compiler = webpack(mainConfig)
 

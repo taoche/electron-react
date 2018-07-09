@@ -10,8 +10,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const webpackConfig = merge(baseWebpackConfig, {
+const rendererProdConfig = merge(baseWebpackConfig, {
   mode: 'production',
+
+  entry: {
+    renderer: ['@babel/polyfill', './src/renderer/index.tsx'],
+  },
 
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
 
@@ -113,7 +117,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
-  webpackConfig.plugins.push(
+  rendererProdConfig.plugins.push(
     new CompressionWebpackPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
@@ -126,7 +130,7 @@ if (config.build.productionGzip) {
 
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+  rendererProdConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = webpackConfig;
+module.exports = rendererProdConfig;
