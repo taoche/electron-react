@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const config = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.renderer.base.conf');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -20,9 +20,9 @@ const rendererProdConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
 
   output: {
-    path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
+    filename: '[name].js',
+    libraryTarget: 'commonjs2',
+    path: path.join(__dirname, '../app/dist')
   },
 
   module: {
@@ -44,20 +44,7 @@ const rendererProdConfig = merge(baseWebpackConfig, {
         sourceMap: false,
         parallel: true,
       }),
-    ],
-    runtimeChunk: {
-      name: 'vendor',
-    },
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /\/node_modules\//,
-          chunks: 'all',
-          name: 'vendor',
-          enforce: true,
-        },
-      },
-    },
+    ]
   },
 
   plugins: [
@@ -84,18 +71,14 @@ const rendererProdConfig = merge(baseWebpackConfig, {
     }),
 
     new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: './public/index.html',
-      inject: true,
+      filename: 'index.html',
+      template: path.resolve(__dirname, '../app/pages/index.ejs'),
       minify: {
-        removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true,
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
+        removeComments: true
       },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
+      nodeModules: false
     }),
 
     new webpack.HashedModuleIdsPlugin(),
@@ -104,13 +87,13 @@ const rendererProdConfig = merge(baseWebpackConfig, {
     new webpack.optimize.ModuleConcatenationPlugin(),
 
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../public'),
-        to: config.build.assetsSubDirectory,
-        ignore: ['.*'],
-      },
-    ]),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: path.resolve(__dirname, '../public'),
+    //     to: config.build.assetsSubDirectory,
+    //     ignore: ['.*'],
+    //   },
+    // ]),
   ],
 });
 

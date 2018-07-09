@@ -5,8 +5,8 @@ const config = require('../config');
 const merge = require('webpack-merge');
 const DotEnvWebpackPlugin = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const baseWebpackConfig = require('./webpack.renderer.base.conf');
 
 const HOST = process.env.HOST;
@@ -50,9 +50,9 @@ const rendererDevConfig = merge(baseWebpackConfig, {
 
   plugins: [
     // Apply the .env file
-    new DotEnvWebpackPlugin({
-      path: './.env',
-    }),
+    // new DotEnvWebpackPlugin({
+    //   path: './.env',
+    // }),
 
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env'),
