@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-var-requires": false,
+    "no-floating-promises": false,
+    "jsx-no-lambda": false,
+    "object-literal-sort-keys": false,
+    "no-implicit-dependencies": false
+  }
+}

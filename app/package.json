@@ -1,0 +1,16 @@
+{
+  "name": "electron-react",
+  "version": "0.1.0",
+  "productName": "Boilerplate",
+  "description": "Yet another boilerplate",
+  "main": "dist/main.js",
+  "author": {
+    "name": "taoche",
+    "email": "taoche2010@gmail.com"
+  },
+  "dependencies": {
+    "electron-config": "^0.2.1",
+    "electron-is": "^2.3.0",
+    "electron-log": "^1.2.2"
+  }
+}

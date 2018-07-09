@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "outDir": "build/dist",
+    "baseUrl": ".",
+    "module": "esnext",
+    "target": "es2015",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false, // We don't want TS to get in the way
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "paths": {
+      "@/*": [
+        "src/renderer/*"
+      ],
+      "*": [
+        "node_modules/*"
+      ]
+    }
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "forkChecker": true,
+    "useCache": true,
+    "babelCore": "@babel/core"
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "webpack"
+  ]
+}
