@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, globalShortcut } from 'electron' // eslint-disable-line
 
 /**
  * Set `__static` path to static files in production
@@ -31,6 +31,21 @@ function createWindow() {
 }
 
 app.on('ready', createWindow);
+
+app.on('ready', function() {
+   // FOR DEBUG
+  let devTime = 0;
+  globalShortcut.register('CommandOrControl+SHIFT+I', () => {
+    if (devTime >= 4) {
+      BrowserWindow.getAllWindows().forEach(window => {
+        const { webContents } = window;
+        window.show();
+        webContents.openDevTools();
+      });
+    }
+    devTime += 1;
+  });
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
