@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+const webpack = require('webpack')
 const merge = require('webpack-merge');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
@@ -17,6 +18,12 @@ const mainProdConfig = merge(mainBaseWebpackConfig, {
     __dirname: false,
     __filename: false
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })
+  ],
 
   optimization: {
     minimizer: [

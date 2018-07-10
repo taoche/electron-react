@@ -19,7 +19,12 @@
   },
   "build": {
     "asar": false,
-    "extraResources": ["resource/"],
+    "extraResources": [
+      "resource/"
+    ],
+    "files": [
+      "!pages/"
+    ],
     "directories": {
       "buildResources": "resource",
       "output": "release"
@@ -46,7 +51,10 @@
       "icon": "resource/icon.ico"
     },
     "linux": {
-      "target": ["deb", "AppImage"],
+      "target": [
+        "deb",
+        "AppImage"
+      ],
       "icon": "resource/icons"
     }
   },

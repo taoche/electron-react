@@ -1,16 +1,22 @@
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["last 1 versions"]
-      }
-    }]
-  ],
-  "plugins": [
-    "@babel/plugin-syntax-typescript",
-    "@babel/plugin-syntax-decorators",
-    "@babel/plugin-syntax-jsx",
-    "react-hot-loader/babel"
-  ]
+  "comments": false,
+  "env": {
+    "main": {
+      "presets": [
+        ["env", {
+          "targets": { "node": 8 }
+        }]
+      ]
+    },
+    "renderer": {
+      "presets": [
+        ["@babel/preset-env", {
+          "modules": false,
+          "targets": {
+            "browsers": ["last 1 versions"]
+          }
+        }]
+      ]
+    }
+  }
 }

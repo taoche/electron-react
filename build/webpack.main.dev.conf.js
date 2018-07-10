@@ -7,13 +7,11 @@ const merge = require('webpack-merge');
 const mainBaseWebpackConfig = require('./webpack.main.base.conf');
 
 const mainDevConfig = merge(mainBaseWebpackConfig, {
-  target: 'electron-main',
+  mode: 'development',
 
   entry: {
     main: path.join(__dirname, '../src/main/index.dev.js')
   },
-
-  mode: 'development',
 
   externals: [
     {'electron-debug': 'electron-debug'}

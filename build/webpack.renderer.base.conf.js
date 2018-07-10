@@ -6,6 +6,7 @@ const path = require('path');
 const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
+const { dependencies } = require('../package.json');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
@@ -18,15 +19,18 @@ module.exports = {
 
   // context: path.resolve(__dirname, '../'),
 
+  // externals: [
+  //   ...Object.keys(dependencies || {})
+  // ],
+
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath:
-      process.env.NODE_ENV === 'production'
-        ? config.build.assetsPublicPath
-        : config.dev.assetsPublicPath,
+    // publicPath:
+    //   process.env.NODE_ENV === 'production'
+    //     ? config.build.assetsPublicPath
+    //     : config.dev.assetsPublicPath,
   },
-
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     plugins: [
@@ -55,7 +59,13 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true
+              cacheDirectory: true,
+              plugins: [
+                '@babel/plugin-syntax-typescript',
+                '@babel/plugin-syntax-decorators',
+                '@babel/plugin-syntax-jsx',
+                'react-hot-loader/babel',
+              ]
             },
           },
           'awesome-typescript-loader',
