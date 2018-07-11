@@ -9,7 +9,7 @@
   "scripts": {
     "prettier": "prettier --write 'src/**/*{.js,.tsx,ts}'",
     "build": "node build/build.js && build --config $npm_package_config_builder",
-    "build:dir": "node build/build.js && electron-builder --dir",
+    "build:dir": "node build/build.js && build --config $npm_package_config_builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node build/build.js",
     "dev": "node build/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",

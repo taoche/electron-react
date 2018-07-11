@@ -1,5 +1,8 @@
 {
   "asar": false,
+  "extraMetadata": {
+    "productName": "Boilerplate-alpha"
+  },
   "compression": "normal",
   "extraResources": [
     "resource/"
