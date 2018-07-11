@@ -8,55 +8,17 @@
   "main": "./app/dist/main.js",
   "scripts": {
     "prettier": "prettier --write 'src/**/*{.js,.tsx,ts}'",
-    "build": "node build/build.js && electron-builder",
+    "build": "node build/build.js && build --config $npm_package_config_builder",
     "build:dir": "node build/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node build/build.js",
     "dev": "node build/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
-    "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config build/webpack.main.config.js",
-    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config build/webpack.renderer.config.js",
+    "pack:main": "webpack --progress --colors --config build/webpack.main.config.js",
+    "pack:renderer": "webpack --progress --colors --config build/webpack.renderer.config.js",
     "postinstall": "electron-builder install-app-deps"
   },
-  "build": {
-    "asar": false,
-    "extraResources": [
-      "resource/"
-    ],
-    "files": [
-      "!pages/"
-    ],
-    "directories": {
-      "buildResources": "resource",
-      "output": "release"
-    },
-    "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
-    },
-    "mac": {
-      "icon": "resource/icon.icns"
-    },
-    "win": {
-      "icon": "resource/icon.ico"
-    },
-    "linux": {
-      "target": [
-        "deb",
-        "AppImage"
-      ],
-      "icon": "resource/icons"
-    }
+  "config": {
+    "builder": "./build/builder.alpha.json"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.49",
@@ -136,8 +98,8 @@
     "react-router-dom": "4.3.1"
   },
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
   },
   "browserslist": [
     "> 1%",
