@@ -1,0 +1,47 @@
+{
+  "extraResources": [
+    "resource/"
+  ],
+  "files": [
+    "!pages/"
+  ],
+  "directories": {
+    "buildResources": "resource",
+    "output": "release"
+  },
+  "dmg": {
+    "icon": "resource/icon.icns",
+    "iconSize": 80,
+    "iconTextSize": 12,
+    "internetEnabled": "true",
+    "title": "${productName} ${version}",
+    "window": {
+      "x": 400,
+      "y": 100,
+      "width": 550,
+      "height": 369
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": true,
+    "allowToChangeInstallationDirectory": true
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    ]
+  },
+  "linux": {
+    "target": [
+      "deb",
+      "AppImage"
+    ]
+  }
+}
