@@ -41,7 +41,7 @@ const rendererProdConfig = merge(baseWebpackConfig, {
             warnings: false,
           },
         },
-        sourceMap: false,
+        sourceMap: config.build.productionSourceMap,
         parallel: true,
       }),
     ]
@@ -73,12 +73,15 @@ const rendererProdConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../app/pages/index.ejs'),
+      inject: true,
       minify: {
+        removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
       },
-      nodeModules: false
+      chunksSortMode: 'dependency'
     }),
 
     new webpack.HashedModuleIdsPlugin(),
