@@ -56,7 +56,8 @@ const rendererDevConfig = merge(baseWebpackConfig, {
 
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env'),
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
+      '__assets': `"${path.join(__dirname, '../app/assets').replace(/\\/g, '\\\\')}"`
     }),
 
     new webpack.HotModuleReplacementPlugin(),

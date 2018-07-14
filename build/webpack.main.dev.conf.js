@@ -24,7 +24,7 @@ const mainDevConfig = merge(mainBaseWebpackConfig, {
 
   plugins: [
     new webpack.DefinePlugin({
-      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
+      '__assets': `"${path.join(__dirname, '../app/assets').replace(/\\/g, '\\\\')}"`
     })
   ]
 })
