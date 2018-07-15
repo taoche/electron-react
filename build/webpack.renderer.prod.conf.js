@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const config = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.renderer.base.conf');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -90,13 +90,13 @@ const rendererProdConfig = merge(baseWebpackConfig, {
     new webpack.optimize.ModuleConcatenationPlugin(),
 
     // copy custom static assets
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: path.resolve(__dirname, '../public'),
-    //     to: config.build.assetsSubDirectory,
-    //     ignore: ['.*'],
-    //   },
-    // ]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../app/assets'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*'],
+      },
+    ]),
   ],
 });
 

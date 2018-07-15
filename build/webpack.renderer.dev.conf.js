@@ -5,7 +5,7 @@ const config = require('../config');
 const merge = require('webpack-merge');
 const DotEnvWebpackPlugin = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const baseWebpackConfig = require('./webpack.renderer.base.conf');
 
@@ -29,8 +29,7 @@ const rendererDevConfig = merge(baseWebpackConfig, {
   devServer: {
     clientLogLevel: 'warning',
     hot: true,
-    // contentBase: false, // since we use CopyWebpackPlugin.
-    contentBase: path.join(__dirname, '../'),
+    contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -71,13 +70,13 @@ const rendererDevConfig = merge(baseWebpackConfig, {
     }),
 
     // copy custom static assets
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: path.resolve(__dirname, '../public'),
-    //     to: config.dev.assetsSubDirectory,
-    //     ignore: ['.*'],
-    //   },
-    // ]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../app/assets'),
+        to: config.dev.assetsSubDirectory,
+        ignore: ['.*'],
+      },
+    ]),
   ],
 });
 
