@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 import CustomButton, { blueButton, orangeButton } from '../../components/CustomButton';
 import { AppStore } from '../../stores';
-import logo from './logo.svg';
 
 const appStyles = css`
   font-family: sans-serif;
@@ -49,7 +48,7 @@ class App extends React.Component<IAppProps> {
         <Link to="/notecount">Counts page</Link>
         <p />
         <header>
-          <img src={logo} alt="logo" />
+          <img src="assets/logo.svg" alt="logo" />
           <div>
             <CustomButton
               title="Add a latin note"

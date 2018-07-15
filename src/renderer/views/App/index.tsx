@@ -13,7 +13,6 @@ export default () => {
     <Provider {...store}>
       <Router>
         <div>
-          <img src="assets/logo.png" alt=""/>
           <TopNavigation />
           <Route exact={true} path="/" component={Notes} />
           <Route path="/notecount" component={NoteCount} />
